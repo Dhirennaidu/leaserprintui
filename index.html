@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Details & Print Preview</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+.main-container {
+  display: flex;
+  min-height: auto;
+}
+.form-section {
+  flex: 1 1 320px;
+  background: #e7eefc;
+  padding: 30px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.preview-section {
+  flex: 2 1 200px;
+  background: #f0f4fa;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  
+}
+.section-header {
+  background: #3576c7;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 14px 18px;
+  border-radius: 8px 8px 0 0;
+}
+.details-box {
+  display: flex;
+  gap: 18px;
+  padding: 14px;
+  background: #fff;
+  border-radius: 0 0 8px 8px;
+}
+.logo-box,
+.qr-bar-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+#logoPreview,
+#previewLogo {
+  width: 5vw;
+  height: 10vh;
+  background: #f1f1f1;
+  border: 1px solid #bbb;
+  object-fit: contain;
+}
+.qr-code {
+ width: 5vw;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f1f1;
+  border: 1px solid #bbb;
+  font-size: 18px;
+}
+.qr-bar-box button {
+  background: #3576c7;
+  color: #fff;
+  border: none;
+  padding: 6px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1 1 160px;
+}
+.fields input {
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  font-size: 16px;
+}
+.fields button {
+  background: #3576c7;
+  color: #fff;
+  border: none;
+  padding: 6px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 6px;
+}
+#previewBtn,
+#finalSaveBtn {
+  background: #3576c7;
+  color: #fff;
+  border: none;
+  padding: 8px 28px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 14px 0;
+  font-size: 18px;
+}
+
+/* Adjustable 77mm x 51mm preview box */
+.preview-box {
+  background: #fff;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 77mm;
+  height: 51mm;
+  box-shadow: 0 0 10px rgba(0,0,0,0.06);
+  box-sizing: border-box;
+  margin-bottom: 22px;
+}
+.preview-images {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 18px;
+}
+
+/* Responsive fallback for small screens */
+@media (max-width: 900px) {
+  .main-container {
+    flex-direction: column;
+  }
+  .preview-section {
+    min-width: unset;
+    align-items: stretch;
+  }
+  .preview-box {
+    width: 100%;
+    height: auto;
+    min-width: 250px;
+    min-height: 160px;
+  }
+}
+  .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+          
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .logo-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-tabs a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-tabs a:hover {
+            color: #2c5aa0;
+        }
+
+        .nav-tabs a.active {
+            color: #2c5aa0;
+            font-weight: 600;
+        }
+
+        .nav-tabs a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #2c5aa0;
+            border-radius: 3px;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .admin {
+            background-color: #f1f5f9;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .admin:hover {
+            background-color: #e2e8f0;
+            color: #2c5aa0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            header {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .nav-tabs {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .logo-name {
+                font-size: 18px;
+            }
+            
+            .nav-tabs {
+                gap: 15px;
+            }
+            
+            .nav-tabs a {
+                font-size: 14px;
+            }
+            
+            .admin {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+        }
+</style>
+<body>
+  
+        <header>
+            <div class="logo-section">
+                <div class="logo"><img src="./logo.jpeg" style="width:100%"/></div>
+                <div class="logo-name" style="color: #2c5aa0;font-weight: bold;">PNM ENGINEARING</div>
+            </div>
+            
+            <nav class="nav-tabs">
+                <a href="/" class="active">Addcustomer</a>
+                <a href="/Printdata.html">Print's Details</a>
+                <a href="/printlog.html">Print log</a>
+            </nav>
+            
+            <div class="profile-section">
+                <div class="profile">
+                    <div class="profile-icon">U</div>
+                </div>
+                <div class="admin">Admin</div>
+            </div>
+        </header>
+
+  <div class="main-container">
+    <!-- Left Side: Details Forms -->
+    <div class="form-section">
+      <!-- Customer Details -->
+      <section>
+        <div class="section-header">Customer Details</div>
+        <div class="details-box">
+          <div class="logo-box">
+            <img id="logoPreview" src="" alt="Logo" />
+            <input type="file" id="logoInput" accept="image/*" hidden>
+            <button id="uploadLogoBtn">Upload Logo</button>
+          </div>
+          <div class="fields">
+            <input type="text" id="customerId" placeholder="Customer ID">
+            <input type="text" id="customerName" placeholder="Customer Name">
+            <button id="saveCustomer">Save</button>
+          </div>
+        </div>
+      </section>
+      <!-- Item Details -->
+      <section>
+        <div class="section-header">Item Details</div>
+        <div class="details-box">
+          <div class="qr-bar-box">
+            
+            <div id="codeDisplay" class="qr-code">QR Code</div>
+            <div style="display: flex;">
+            <span><input type="radio" name="qr" id="qrBtn" placeholder="qr">QR</span>
+            <span><input type="radio" name="qr" id="barBtn">BAR</span>
+            </div>
+          </div>
+          
+          <div class="fields">
+            <input type="text" id="itemCode" placeholder="Item Code">
+            <textarea  id="itemDesc" placeholder="Item Description"></textarea>
+            <button id="saveItem">Save</button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Right Side: Print Preview -->
+    <div class="preview-section">
+      <div id="previewBtn" style="width:100%; text-align: center;">Preview</div>
+      <div class="preview-box" id="previewBox">
+        <div>
+          <div><p style="font-size: 10px;font-weight:bold;">CUSTOMER NAME:</p><span id="previewCustomer" style="font-size: 10px;">PNM ENGINEARING</span></div>
+          <br><br>
+          <div style="display: flex;font-size: 10px;font-weight:bold;">ITEM CODE: </p><span id="previewCode" style="font-size: 10px;">12312312312</span></div>
+          <div style="display: flex;font-size: 10px;font-weight:bold;">ITEM DESCRIPTION: </p></div>
+          <div style="display: flex;font-size: 9px;">ALKLH HKDSHK SKHKHKHK SHDKHKHKS HKHSKHDK KSHDKHKS KHKDHKHKS HKSHKHDKDS AJKHDKJHK AHKHKH AHKHKHA HKHKHKH</p></div>
+        </div>
+        <div class="preview-images">
+          <img id="previewLogo" src="./logo.jpeg" alt="Logo" />
+          <div id="previewQr" class="qr-code"><img id="previewLogo" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Example"/></div>
+        </div>
+      </div>
+      <button id="finalSaveBtn">Save</button>
+    </div>
+  </div>
+  <script>
+    const logoInput = document.getElementById('logoInput');
+const logoPreview = document.getElementById('logoPreview');
+const uploadLogoBtn = document.getElementById('uploadLogoBtn');
+uploadLogoBtn.onclick = () => logoInput.click();
+logoInput.onchange = (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      logoPreview.src = evt.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+};
+const codeDisplay = document.getElementById('codeDisplay');
+document.getElementById('qrBtn').onclick = () => codeDisplay.textContent = 'QR Code';
+document.getElementById('barBtn').onclick = () => codeDisplay.textContent = 'BAR Code';
+document.getElementById('previewBtn').onclick = function() {
+  document.getElementById('previewCustomer').textContent = document.getElementById('customerName').value;
+  document.getElementById('previewCode').textContent = document.getElementById('itemCode').value;
+  document.getElementById('previewDesc').textContent = document.getElementById('itemDesc').value;
+  document.getElementById('previewLogo').src = logoPreview.src;
+  document.getElementById('previewQr').textContent = codeDisplay.textContent;
+};
+
+  </script>
+</body>
+</html>
